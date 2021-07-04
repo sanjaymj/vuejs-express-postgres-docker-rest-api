@@ -1,0 +1,7 @@
+CREATE TABLE DNA_STRING(
+  id SERIAL PRIMARY KEY,
+  content TEXT
+);
+
+CREATE EXTENSION pg_trgm;
+CREATE EXTENSION fuzzystrmatch;
