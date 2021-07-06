@@ -12,11 +12,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "node-postgres": "^0.6.2",
     "postgres-migrations": "^5.2.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.10",
     "@types/express": "^4.17.12",
     "@types/node": "^16.0.0",
     "@types/pg": "^8.6.0",

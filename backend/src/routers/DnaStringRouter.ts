@@ -4,8 +4,10 @@ import DnaStringController from '../controllers/DnaStringController';
 const router = Router();
 const dnaStringController = new DnaStringController();
 
-router.get('/', dnaStringController.getWithSearchDistance);
+router.get('/', dnaStringController.getAllStringsFromDB);
 
-router.post('/add', dnaStringController.post)
+router.get('/search-by-content', dnaStringController.getStringsWithSearchDistance);
+
+router.post('/add', dnaStringController.addDnaStringToDatabase)
 
 export default router;
