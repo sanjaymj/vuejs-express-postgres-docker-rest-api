@@ -27,8 +27,11 @@ class DnaStringController {
         const searchDistance = req.query['distance'] ? req.query['distance'] : 0;
 
         if (searchString === undefined) {
-            res.status(422).send("search string cannot be null");
-        } else {
+            res.status(400).send("search string cannot be null");
+        } else if(searchDistance < 0) {
+            res.status(400).send("search distance cannot be negative");
+        }
+        else {
             try {
                 const pool: Pool = dbConfig.pool;
                 const client = await pool.connect();
@@ -58,7 +61,7 @@ class DnaStringController {
             const client = await pool.connect();
 
             // check of the string already exists
-            if (!DnaStringController.isStringAlreadyFoundInDatabase(dnaStringContent, client)) {
+            if (await DnaStringController.isStringAlreadyFoundInDatabase(dnaStringContent, client)) {
                 client.release();
                 res.status(400).send(`'${dnaStringContent}' already exists`);
             } else {
@@ -77,9 +80,9 @@ class DnaStringController {
     private static async isStringAlreadyFoundInDatabase(dnaString: String, client: PoolClient): Promise<boolean> {
         const queryResult = await client.query(`SELECT count(*) FROM DNA_STRING WHERE content = '${dnaString}'`);
         if (!!queryResult && queryResult.rows && queryResult.rows.length) {
-            return queryResult.rows[0]['count'] > 0;
+            return Promise.resolve(queryResult.rows[0]['count'] > 0);
         }
-        return false;
+        return Promise.reject(false);
     }
 
     private static isDnaStringValid(dnaString: String) {

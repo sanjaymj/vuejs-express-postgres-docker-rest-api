@@ -18,7 +18,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { State } from "vuex-class";
-import { DnaStructureDto } from "@/models";
+import { DnaStructureDto } from "./../models";
 
 @Component({})
 export default class Home extends Vue {

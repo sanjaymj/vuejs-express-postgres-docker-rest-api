@@ -72,7 +72,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import DnaStringTableContainer from "./DnaStringTableContainer.vue";
 import DataHandler from "../services/DataHandler";
-import { store } from "@/store";
+import { store } from "./../store";
 
 @Component({
   components: {
